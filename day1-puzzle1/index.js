@@ -161,4 +161,19 @@ const input = [1742, 1763, 1238, 1424, 1736, 1903, 1580, 1847, 1860, 1933, 1779,
     1807,
     1941,1642,1557,1884,1626,489,1989,1327]
 
-    
+    for (let i = 0; i < input.length; i++) {
+        for (let j = 1; j < input.length; j++) {
+            if (input[i] + input[j] === 2020) {
+                console.log(`${input[i]} + ${input[j]} = 2020`)
+
+                let output = input[i] * input[j]
+
+                console.log(`Output: ${output}`)
+
+                i = input.length;
+                j = input.length;
+            } else {
+                console.log(`${input[i]} + ${input[j]} != 2020`)
+            }
+        }
+    }
