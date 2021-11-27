@@ -2,7 +2,7 @@ const fs = require("fs");
 let dataArr = []
 let validPasswords = 0
 
-let findValidPasswords = (arr) => {
+let findValidPasswordsOld = (arr) => {
     for(i in arr) {
         let lowerBound = arr[i][0][0]
         let upperBound = arr[i][0][1]
@@ -32,6 +32,34 @@ let findValidPasswords = (arr) => {
     
 }
 
+let findValidPasswords = (arr) => {
+    for(i in arr){
+        let firstPosition = arr[i][0][0]
+        let secondPosition = arr[i][0][1]
+        let letter = arr[i][0][2]
+        let password = arr[i][0][3].split("")
+        let letterInPosOne = false
+        let letterInPosTwo = false
+
+        if(password[firstPosition - 1] === letter) {
+            letterInPosOne = true
+        }
+
+        if(password[secondPosition - 1] === letter) {
+            letterInPosTwo = true
+        }
+
+        if(letterInPosOne && !letterInPosTwo){
+            validPasswords++
+        }
+        if(!letterInPosOne && letterInPosTwo){
+            validPasswords++
+        }
+    }
+
+    return validPasswords
+}
+
 let createArrMatrix = () => {
     // Pull in data from input.txt
     let input = fs.readFileSync('./input.txt', 'utf8')
@@ -58,5 +86,7 @@ let createArrMatrix = () => {
     
     return dataArr
 }
+
+// console.log(findValidPasswordsOld(createArrMatrix()))
 
 console.log(findValidPasswords(createArrMatrix()))
